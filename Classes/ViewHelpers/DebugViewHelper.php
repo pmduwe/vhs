@@ -11,12 +11,10 @@ namespace FluidTYPO3\Vhs\ViewHelpers;
 use TYPO3\CMS\Extbase\Reflection\Exception\PropertyNotAccessibleException;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-use TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\ObjectAccessorNode as LegacyFluidObjectAccessorNode;
-use TYPO3Fluid\Fluid\Core\Parser\SyntaxTree\ObjectAccessorNode as StandaloneFluidObjectAccessorNode;
-use TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\ViewHelperNode as LegacyFluidViewHelperNode;
-use \TYPO3Fluid\Fluid\Core\Parser\SyntaxTree\ViewHelperNode as StandaloneFluidViewHelperNode;
+use TYPO3Fluid\Fluid\Core\Parser\SyntaxTree\ObjectAccessorNode;
+use TYPO3Fluid\Fluid\Core\Parser\SyntaxTree\ViewHelperNode;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3\CMS\Fluid\Core\ViewHelper\Facets\ChildNodeAccessInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\ViewHelperInterface;
 
 /**
  * ### ViewHelper Debug ViewHelper (sic)
@@ -65,7 +63,7 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\Facets\ChildNodeAccessInterface;
  * @package Vhs
  * @subpackage ViewHelpers
  */
-class DebugViewHelper extends AbstractViewHelper implements ChildNodeAccessInterface
+class DebugViewHelper extends AbstractViewHelper implements ViewHelperInterface
 {
 
     /**
@@ -167,16 +165,16 @@ class DebugViewHelper extends AbstractViewHelper implements ChildNodeAccessInter
     /**
      * Sets the direct child nodes of the current syntax tree node.
      *
-     * @param \TYPO3\CMS\Fluid\Core\Parser\SyntaxTree\AbstractNode[] $childNodes
+     * @param TYPO3Fluid\Fluid\Core\Parser\SyntaxTree\AbstractNode[] $childNodes
      * @return void
      */
     public function setChildNodes(array $childNodes)
     {
         foreach ($childNodes as $childNode) {
-            if (true === $childNode instanceof LegacyFluidViewHelperNode || $childNode instanceof StandaloneFluidViewHelperNode) {
+            if (true === $childNode instanceof ViewHelperNode) {
                 array_push($this->childViewHelperNodes, $childNode);
             }
-            if (true === $childNode instanceof LegacyFluidObjectAccessorNode || $childNode instanceof StandaloneFluidObjectAccessorNode) {
+            if (true === $childNode instanceof ObjectAccessorNode) {
                 array_push($this->childObjectAccessorNodes, $childNode);
             }
         }

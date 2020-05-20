@@ -22,7 +22,7 @@ trait SourceSetViewHelperTrait
     /**
      * used to attach srcset variants of a given image to the specified tag
      *
-     * @param \TYPO3\CMS\Fluid\Core\ViewHelper\TagBuilder $tag the tag to add the srcset as argument
+     * @param \\TYPO3Fluid\Fluid\Core\ViewHelper\TagBuilder $tag the tag to add the srcset as argument
      * @param string $src image path to render srcsets for
      * @return array
      */

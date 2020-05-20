@@ -24,6 +24,6 @@ class ErrorUtility
         if (version_compare(TYPO3_version, '8.0', '>=')) {
             throw new \TYPO3Fluid\Fluid\Core\ViewHelper\Exception($message, $code);
         }
-        throw new \TYPO3\CMS\Fluid\Core\ViewHelper\Exception($message, $code);
+        throw new \\TYPO3Fluid\Fluid\Core\ViewHelper\Exception($message, $code);
     }
 }
